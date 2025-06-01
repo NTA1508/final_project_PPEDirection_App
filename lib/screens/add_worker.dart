@@ -46,7 +46,14 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Add Manager"),
         automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/profile');
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -55,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Sign Up",
+                "Add Manager",
                 style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -129,7 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   child: Center(
                       child: isSigningUp ? CircularProgressIndicator(color: Colors.white,):Text(
-                        "Sign Up",
+                        "Add",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       )),
@@ -138,28 +145,6 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Already have an account?"),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()),
-                                (route) => false);
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
-                      ))
-                ],
-              )
             ],
           ),
         ),
@@ -205,8 +190,8 @@ class _SignUpPageState extends State<SignUpPage> {
         "floor": floor,
       });
 
-      showToast(message: "User is successfully created");
-      Navigator.pushNamed(context, "/home");
+      showToast(message: "Manager is successfully created");
+      Navigator.pushNamed(context, "/profile");
     } else {
       showToast(message: "Some error happened");
     }

@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
   void _startProgressTimer() {
     Timer.periodic(const Duration(milliseconds: 100), (timer) {
       setState(() {
-        _progress += 1;
+        _progress += 5;
         if (_progress >= 100) {
           timer.cancel();
           _navigateToNextPage();

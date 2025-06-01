@@ -8,6 +8,7 @@ import '../components/detection_results.dart';
 import '../services/ppe_detection_service.dart';
 import '../models/detection_model.dart';
 import '../widgets/bottom_navbar.dart';
+import '../widgets/notification_util.dart';
 
 
 class DetectionScreen extends StatefulWidget {
@@ -142,8 +143,16 @@ class _DetectionScreenState extends State<DetectionScreen> {
         _detectionResult = result;
       });
 
-      if (result.missingPpe.isNotEmpty && !_isRealtime) {
-        _showMissingPPEDialog(result.missingPpe);
+      // if (result.missingPpe.isNotEmpty && !_isRealtime) {
+      //   _showMissingPPEDialog(result.missingPpe);
+      // }
+
+      if (result.missingPpe.isNotEmpty) {
+        final items = result.missingPpe.join(', ');
+        await NotificationUtil.showNotification(
+          'Safety Alert!',
+          'Missing: $items',
+        );
       }
     } catch (e) {
       debugPrint('Error processing image: $e');
@@ -153,27 +162,27 @@ class _DetectionScreenState extends State<DetectionScreen> {
     }
   }
 
-  void _showMissingPPEDialog(List<String> missingItems) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Row(
-          children: [
-            Icon(Icons.warning, color: Colors.red),
-            SizedBox(width: 8),
-            Text('Safety Alert'),
-          ],
-        ),
-        content: Text('Missing: ${missingItems.join(', ')}'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
+  // void _showMissingPPEDialog(List<String> missingItems) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: Row(
+  //         children: [
+  //           Icon(Icons.warning, color: Colors.red),
+  //           SizedBox(width: 8),
+  //           Text('Safety Alert'),
+  //         ],
+  //       ),
+  //       content: Text('Missing: ${missingItems.join(', ')}'),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () => Navigator.pop(context),
+  //           child: Text('OK'),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   void _toggleRealtime() {
     if (_isRealtime) {
@@ -268,11 +277,8 @@ class _DetectionScreenState extends State<DetectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFf1f5f9),
       appBar: AppBar(
         title: Text('PPE Detection'),
-        backgroundColor: Color(0xFF1e40af),
-        foregroundColor: Colors.white,
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 8.0),

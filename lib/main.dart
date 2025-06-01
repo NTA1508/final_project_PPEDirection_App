@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:ppe_detection/screens/add_worker.dart';
 import 'package:ppe_detection/screens/notification_screen.dart';
 import 'package:ppe_detection/screens/profile.dart';
+import 'package:ppe_detection/widgets/notification_util.dart';
 import 'auth/login.dart';
 import 'screens/splash_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/detection_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-// void main() {
-//   runApp(const PPEDetectionApp());
-// }
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
 
 void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationUtil.init();
+
   WidgetsFlutterBinding.ensureInitialized(); // bắt buộc nếu gọi async trong main
   await Firebase.initializeApp();  // Khởi tạo Firebase
   runApp(const PPEDetectionApp());
