@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../widgets/bottom_navbar.dart';
+import '../widgets/image_fullscreen.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -78,12 +79,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   elevation: 3,
                   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: ListTile(
+                    onTap: () {
+                      if (imageUrl.isNotEmpty) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FullScreenImagePage(imageUrl: imageUrl),
+                          ),
+                        );
+                      }
+                    },
+
                     contentPadding: const EdgeInsets.all(12),
                     title: Text("Missing: ${missingPPE.join(', ')}", style: const TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Text("Time: $timestamp"),
-                    leading: imageUrl.isNotEmpty
-                        ? Image.network(imageUrl, width: 60, height: 60, fit: BoxFit.cover)
-                        : const Icon(Icons.warning, color: Colors.red),
+                      leading: imageUrl.isNotEmpty
+                          ? Image.network(imageUrl, width: 60, height: 60, fit: BoxFit.cover)
+                          : const Icon(Icons.warning, color: Colors.red),
+                      trailing: IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                      final violationKey = violations[index].key;
+                      _violationRef.child(violationKey).remove();
+                      },
+                    ),
                   ),
                 );
               },
