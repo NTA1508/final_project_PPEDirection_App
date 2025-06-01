@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730298585272",
+    "project_id": "finalprj-92f33",
+    "storage_bucket": "finalprj-92f33.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730298585272:android:2686b89a4f47f6e0bd244d",
+        "android_client_info": {
+          "package_name": "com.example.ppe_detection"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfyP4_b2l3DHE43nJQqsTqFucAcyKzU_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
