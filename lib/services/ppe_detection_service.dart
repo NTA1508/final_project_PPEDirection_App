@@ -6,7 +6,8 @@ import '../models/detection_model.dart';
 class PPEDetectionService {
   // Replace with your actual backend IP or domain
   //static const String _baseUrl = 'http://192.168.2.153:5000';
-  static const String _baseUrl = 'http://192.168.1.191:5001';
+  //static const String _baseUrl = 'http://192.168.1.191:5001';
+  static const String _baseUrl = 'https://ppedetectionmodel-api.onrender.com/';
 
   Future<DetectionResult> detectPPE(File imageFile) async {
     try {
